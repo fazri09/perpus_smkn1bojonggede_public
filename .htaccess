@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /perpus/
+    RewriteBase /
 
     # Jika file atau folder tidak ada, arahkan ke index.php
     RewriteCond %{REQUEST_FILENAME} !-f
