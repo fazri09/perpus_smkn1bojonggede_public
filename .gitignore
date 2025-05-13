@@ -23,6 +23,11 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/*
 
 /.htaccess
+# Ignore database.php
+/application/config/database.php
+
+# Ignore config.php
+/application/config/config.php
 
 ## Sublime Text cache files
 *.tmlanguage.cache
