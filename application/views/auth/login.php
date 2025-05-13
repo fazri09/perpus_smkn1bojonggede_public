@@ -56,17 +56,6 @@
                                             <label class="form-label" for="userpassword">Password</label>                                            
                                             <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password">                            
                                         </div><!--end form-group--> 
-            
-                                        <div class="form-group row mt-3">
-                                            <div class="col-sm-6">
-                                                <div class="form-check form-switch form-switch-success">
-                                                </div>
-                                            </div><!--end col--> 
-                                            <div class="col-sm-6 text-end">
-                                                <a href="<?= base_url('auth-recover-pw.html'); ?>" class="text-muted font-13"><i class="dripicons-lock"></i> Forgot password?</a>                                    
-                                            </div><!--end col--> 
-                                        </div><!--end form-group--> 
-            
                                         <div class="form-group mb-0 row">
                                             <div class="col-12">
                                                 <div class="d-grid mt-3">
