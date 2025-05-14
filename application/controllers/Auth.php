@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth extends Fazri_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('User_model');
         $this->load->library('session');
     }
 
@@ -18,7 +17,16 @@ class Auth extends CI_Controller {
 
             $user = $this->User_model->check_login($username, $password);
             if ($user) {
+
+                $ip_address = $this->input->ip_address();
+                $now = date('Y-m-d H:i:s');
+
+                // Update last_login dan last_ip
+                $this->User_model->update_login_info($user->id, $now, $ip_address);
+
                 $this->session->set_userdata('user_id', $user->id);
+                $this->session->set_userdata('user_nama', $user->nama);
+                $this->session->set_userdata('user_role', $user->role);
                 redirect('dashboard');
             } else {
                 // Set flashdata untuk menampilkan error

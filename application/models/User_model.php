@@ -11,4 +11,15 @@ class User_model extends CI_Model {
             return false;
         }
     }
+    
+    public function update_login_info($user_id, $datetime, $ip)
+    {
+        $data = [
+            'last_login' => $datetime,
+            'last_ip' => $ip
+        ];
+        $this->db->where('id', $user_id);
+        $this->db->update('users', $data);
+    }
+
 }
