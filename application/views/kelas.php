@@ -6,14 +6,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-                                <h4 class="page-title">Data Jurusan</h4>
+                                <h4 class="page-title">Data Kelas</h4>
                                 <div class="">
                                     <ol class="breadcrumb mb-0">
                                         <li class="breadcrumb-item"><a href="#">Mifty</a>
                                         </li><!--end nav-item-->
                                         <li class="breadcrumb-item"><a href="#">Master</a>
                                         </li><!--end nav-item-->
-                                        <li class="breadcrumb-item active">Jurusan</li>
+                                        <li class="breadcrumb-item active">Kelas</li>
                                     </ol>
                                 </div>                                
                             </div><!--end page-title-box-->
@@ -25,7 +25,7 @@
                                 <div class="card-header">
                                     <div class="row align-items-center">
                                         <div class="col">                      
-                                            <h4 class="card-title">Data Jurusan</h4>                      
+                                            <h4 class="card-title">Data Kelas</h4>                      
                                         </div><!--end col-->
                                         <div class="col-auto">
                                             <?php if ($this->session->flashdata('notif')): ?>
@@ -39,7 +39,7 @@
                                                     </div>
                                                 </div>
                                             <?php endif; ?>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBook"><i class="fa-solid fa-plus me-1"></i> Tambah Jurusan</button>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addKelas"><i class="fa-solid fa-plus me-1"></i> Tambah Kelas</button>
                                         </div>
                                     </div>  <!--end row-->                                  
                                 </div><!--end card-header-->
@@ -49,26 +49,23 @@
                                             <thead class="table-light">
                                               <tr>
                                                 <th>No</th>
-                                                <th>Nama Jurusan</th>
-                                                <th>Singkatan Jurusan</th>
+                                                <th>Nama Kelas</th>
                                                 <th>Aksi</th>
                                               </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (!empty($jurusan)) : ?>
-                                                    <?php $no = 1; foreach ($jurusan as $row): ?> 
+                                                <?php if (!empty($kelas)) : ?>
+                                                    <?php $no = 1; foreach ($kelas as $row): ?> 
                                                         <tr>
                                                             <td><?= $no++ ?></td>
-                                                            <td><?= $row->nama_jurusan ?></td>
-                                                            <td><?= $row->singkatan_jurusan ?></td>
+                                                            <td><?= $row->nama_kelas ?></td>
                                                             <td>                                                       
                                                                 <a href="#" 
                                                                     data-bs-toggle="modal" 
-                                                                    data-bs-target="#editJurusan" 
+                                                                    data-bs-target="#editKelas" 
                                                                     title="Edit"
                                                                     data-id="<?= $row->id ?>"
-                                                                    data-nama_jurusan="<?= $row->nama_jurusan ?>"
-                                                                    data-singkatan_jurusan="<?= $row->singkatan_jurusan ?>">
+                                                                    data-nama_kelas="<?= $row->nama_kelas ?>">
                                                                     <i class="las la-pen text-secondary fs-18"></i>
                                                                 </a>
                                                             </td>
@@ -76,7 +73,7 @@
                                                     <?php endforeach; ?>
                                                <?php else : ?>
                                                     <tr>
-                                                        <td colspan="7" class="text-center">Belum ada Data Jurusan.</td>
+                                                        <td colspan="7" class="text-center">Belum ada Data Kelas.</td>
                                                     </tr>
                                                 <?php endif; ?>
                                             </tbody>
@@ -158,51 +155,45 @@
             </div>
             <!-- end page content -->
         </div>
-        <div class="modal fade" id="addBook" tabindex="-1"  aria-hidden="true">
+        <div class="modal fade" id="addKelas" tabindex="-1"  aria-hidden="true">
             <div class="modal-dialog modal-fullscreen-md-down">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title">Tambah Jurusan</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="<?= base_url('jurusan/add') ?>" method="post">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="nama_jurusan" class="form-label">Nama&nbsp;Jurusan</label>
-                        <input class="form-control" type="text" id="nama_jurusan" name="nama_jurusan" required>
-                    </div> 
-                    <div class="mb-3">
-                        <label for="singkatan_jurusan" class="form-label">Singkatan&nbsp;Jurusan</label>
-                        <input class="form-control" type="text" id="singkatan_jurusan" name="singkatan_jurusan" required>
-                    </div> 
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-header">
+                        <h6 class="modal-title">Tambah Kelas</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="<?= base_url('kelas/add') ?>" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nama_kelas" class="form-label">Nama&nbsp;Kelas</label>
+                            <input class="form-control" type="text" id="nama_kelas" name="nama_kelas" required>
+                            <small class="form-text text-muted">Example : XII RPL 1</small>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
                 </form>
             </div>
         </div>
 
-        <!-- modal edit jurusan -->
-        <div class="modal fade" id="editJurusan" tabindex="-1" aria-hidden="true">
+        <!-- modal edit kelas -->
+        <div class="modal fade" id="editKelas" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Jurusan</h5>
+                        <h5 class="modal-title">Edit Kelas</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="<?= base_url('jurusan/edit') ?>" method="post">
+                        <form action="<?= base_url('kelas/edit') ?>" method="post">
                             <input type="hidden" name="id" id="id">
                             <div class="mb-3">
-                                <label for="nama_jurusan_edit" class="form-label">Nama Jurusan</label>
-                                <input type="text" class="form-control" id="nama_jurusan_edit" name="nama_jurusan" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="singkatan_jurusan_edit" class="form-label">Singkatan Jurusan</label>
-                                <input type="text" class="form-control" id="singkatan_jurusan_edit" name="singkatan_jurusan" required>
+                                <label for="nama_kelas_edit" class="form-label">Nama Kelas</label>
+                                <input type="text" class="form-control" id="nama_kelas_edit" name="nama_kelas" required>
+                                <small class="form-text text-muted">Example : XII RPL 1</small>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -216,7 +207,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var myModal = document.getElementById('editJurusan');
+    var myModal = document.getElementById('editKelas');
     
     // Event listener untuk menangani ketika modal sedang dibuka
     myModal.addEventListener('show.bs.modal', function (event) {
@@ -225,18 +216,16 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Ambil data dari tombol
         var id = button.getAttribute('data-id');
-        var nama_jurusan = button.getAttribute('data-nama_jurusan');
-        var singkatan_jurusan = button.getAttribute('data-singkatan_jurusan');
+        var nama_kelas = button.getAttribute('data-nama_kelas');
         
         // Cari input yang ada di dalam modal dan setel nilainya
         var modal = myModal;
         modal.querySelector('#id').value = id;
-        modal.querySelector('#nama_jurusan_edit').value = nama_jurusan;
-        modal.querySelector('#singkatan_jurusan_edit').value = singkatan_jurusan;
+        modal.querySelector('#nama_kelas_edit').value = nama_kelas;
         
         // Jika perlu, kamu juga bisa mengatur field lainnya seperti ID atau data tersembunyi
         // Sebagai contoh, menyimpan ID yang dipilih untuk di-submit dengan form
-        modal.querySelector('#editJurusanId').value = id;
+        modal.querySelector('#editKelasId').value = id;
     });
 });
 document.addEventListener('DOMContentLoaded', function() {

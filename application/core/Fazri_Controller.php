@@ -11,5 +11,7 @@ class Fazri_Controller extends CI_Controller {
         $this->load->model('Pos_model');
         $this->load->model('User_model');
         $this->load->model('Jurusan_model');
+        $this->load->model('Siswa_model');
+        $this->load->model('Kelas_model');
     }
 }

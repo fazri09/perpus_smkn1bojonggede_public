@@ -113,7 +113,13 @@
                             <div class="collapse " id="sidebarMaster">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
+                                        <a href="<?= base_url('siswa'); ?>" class="nav-link ">Siswa</a>
+                                    </li><!--end nav-item-->
+                                    <li class="nav-item">
                                         <a href="<?= base_url('jurusan'); ?>" class="nav-link ">Jurusan</a>
+                                    </li><!--end nav-item-->
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('kelas'); ?>" class="nav-link ">Kelas</a>
                                     </li><!--end nav-item-->
                                 </ul><!--end nav-->
                             </div>
