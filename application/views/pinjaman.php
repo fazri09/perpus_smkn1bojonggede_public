@@ -77,7 +77,7 @@
                                                                     data-kode="<?= $row->kode_buku ?>"
                                                                     data-buku="<?= $row->nama_buku ?>"
                                                                     onclick="executeExample(this, 'kembalikanbukuRequest')">
-                                                                    <i class="las la-arrow-left text-secondary fs-18"></i>
+                                                                    <i class="las las la-arrow-circle-left text-secondary fs-18"></i>
                                                                 </a>
                                                             </td>
 
