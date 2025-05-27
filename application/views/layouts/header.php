@@ -12,6 +12,8 @@
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/icons.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/app.min.css') ?>" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Sweet Alert -->
     <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
     <link href="assets/libs/animate.css/animate.min.css" rel="stylesheet" type="text/css">

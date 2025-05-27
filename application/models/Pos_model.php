@@ -85,5 +85,30 @@ class Pos_model extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update('pos', $data);
     }
+
+    public function get_data_peminjaman_per_bulan()
+    {
+        $query = $this->db->query("
+            SELECT 
+                MONTH(tgl_pinjam) AS bulan,
+                COUNT(*) AS total 
+            FROM pos 
+            WHERE tgl_pinjam IS NOT NULL AND tgl_pinjam != '0000-00-00'
+            GROUP BY MONTH(tgl_pinjam)
+            ORDER BY MONTH(tgl_pinjam)
+        ");
+
+        $result = $query->result();
+
+        // Siapkan array 12 bulan default 0
+        $data = array_fill(1, 12, 0);
+        foreach ($result as $row) {
+            $data[(int) $row->bulan] = (int) $row->total;
+        }
+
+        return array_values($data); // Ubah jadi [0, 3, 12, ...]
+    }
+
+
     
 }

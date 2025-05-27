@@ -1,103 +1,59 @@
 var options = {
-    chart: { height: 250, type: "donut" },
-    plotOptions: { pie: { donut: { size: "80%" } } },
-    dataLabels: { enabled: !1 },
-    stroke: { show: !0, width: 2, colors: ["transparent"] },
-    series: [50, 25, 25],
-    legend: {
-      show: !0,
-      position: "bottom",
-      horizontalAlign: "center",
-      verticalAlign: "middle",
-      floating: !1,
-      fontSize: "13px",
-      fontFamily: "Be Vietnam Pro, sans-serif",
-      offsetX: 0,
-      offsetY: 0,
+    chart: {
+      height: 290,
+      type: "area",
+      width: "100%",
+      stacked: true,
+      toolbar: { show: false, autoSelected: "zoom" },
     },
-    labels: ["Currenet", "New", "Retargeted"],
-    colors: ["#6f6af8", "#08b0e7", "#ffc728"],
-    responsive: [
+    colors: ["#2a77f4", "rgba(42, 118, 244, .4)"],
+    dataLabels: { enabled: false },
+    stroke: {
+      curve: "straight",
+      width: [0, 0],
+      dashArray: [0, 4],
+      lineCap: "round",
+    },
+    grid: { padding: { left: 0, right: 0 }, strokeDashArray: 3 },
+    markers: { size: 0, hover: { size: 0 } },
+    series: [
       {
-        breakpoint: 600,
-        options: {
-          plotOptions: { donut: { customScale: 0.2 } },
-          chart: { height: 240 },
-          legend: { show: !1 },
-        },
+        name: "Peminjam",
+        data: [], // kosong dulu, nanti diisi dari AJAX
       },
     ],
-    tooltip: {
-      y: {
-        formatter: function (e) {
-          return e + " %";
-        },
+    xaxis: {
+      type: "month",
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      axisBorder: { show: true },
+      axisTicks: { show: true },
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [100],
       },
     },
+    tooltip: { x: { format: "dd/MM/yy HH:mm" } },
+    legend: { position: "top", horizontalAlign: "right" },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#monthly_income"), options);
+  chart.render();
+
+  // AJAX ambil data dari controller CI
+  $.ajax({
+  url: base_url + "dashboard/grafik_peminjaman_bulanan",
+  method: "GET",
+  dataType: "json",
+  success: function(data) {
+    console.log("Data dari server:", data);
+    chart.updateSeries([{ name: "Peminjam", data: data }]);
   },
-  chart = new ApexCharts(document.querySelector("#customers"), options),
-  options =
-    (chart.render(),
-    {
-      chart: {
-        height: 290,
-        type: "area",
-        width: "100%",
-        stacked: !0,
-        toolbar: { show: !1, autoSelected: "zoom" },
-      },
-      colors: ["#2a77f4", "rgba(42, 118, 244, .4)"],
-      dataLabels: { enabled: !1 },
-      stroke: {
-        curve: "straight",
-        width: [0, 0],
-        dashArray: [0, 4],
-        lineCap: "round",
-      },
-      grid: { padding: { left: 0, right: 0 }, strokeDashArray: 3 },
-      markers: { size: 0, hover: { size: 0 } },
-      series: [
-        {
-          name: "New Visits",
-          data: [0, 40, 90, 40, 50, 30, 35, 20, 10, 0, 0, 0],
-        },
-        {
-          name: "Unique Visits",
-          data: [20, 80, 120, 60, 70, 50, 55, 40, 50, 30, 35, 0],
-        },
-      ],
-      xaxis: {
-        type: "month",
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-        axisBorder: { show: !0 },
-        axisTicks: { show: !0 },
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [100],
-        },
-      },
-      tooltip: { x: { format: "dd/MM/yy HH:mm" } },
-      legend: { position: "top", horizontalAlign: "right" },
-    });
-(chart = new ApexCharts(
-  document.querySelector("#monthly_income"),
-  options,
-)).render();
+  error: function(xhr, status, error) {
+    console.error("Gagal load data grafik:", error);
+  }
+});

@@ -35,4 +35,24 @@ class Buku_model extends CI_Model {
         return $this->db->get()->result();
     }
 
+    public function get_jumlah_buku() {
+        return $this->db->count_all('buku');
+    }
+
+    public function get_total_stok_buku()
+    {
+        $this->db->select("
+            COALESCE(SUM(
+                CASE WHEN pos.type = 'IN' THEN pos.qty ELSE 0 END
+            ), 0) -
+            COALESCE(SUM(
+                CASE WHEN pos.type = 'OUT' THEN pos.qty ELSE 0 END
+            ), 0) AS total_stok
+        ");
+        $this->db->from('pos');
+
+        $query = $this->db->get();
+        return $query->row()->total_stok;
+    }
+
 }

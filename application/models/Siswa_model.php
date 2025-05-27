@@ -25,4 +25,8 @@ class Siswa_model extends CI_Model {
         return $this->db->update($this->table, $data); // Sesuaikan dengan nama tabel di database
     }
 
+    public function get_jumlah_siswa() {
+        return $this->db->count_all('siswa');
+    }
+
 }
