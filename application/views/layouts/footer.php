@@ -6,6 +6,9 @@
 <script src="<?= base_url('assets/js/pages/datatable.init.js') ?>"></script>
 <script src="<?= base_url('assets/js/pages/index.init.js') ?>"></script>
 <script src="<?= base_url('assets/js/app.js') ?>"></script>
+<script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<script src="assets/js/pages/sweet-alert.init.js"></script>
+
 
 </body>
 </html>

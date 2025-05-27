@@ -31,7 +31,7 @@
                                 </div><!--end media-->
                                 <div class="row d-flex justify-content-center">
                                     <div class="col">                                        
-                                        <h3 class="mt-2 mb-0 fw-bold">$8365.00</h3>
+                                        <h3 class="mt-2 mb-0 fw-bold">$365</h3>
                                     </div>
                                     <!--end col-->
                                 </div>

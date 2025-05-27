@@ -1,3 +1,13 @@
+<!-- jQuery wajib lebih dulu -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Select2 + Tema Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+
+
 <div class="page-wrapper">
     
             <!-- Page Content-->
@@ -79,6 +89,15 @@
                                                                     <i class="las la-pen text-secondary fs-18"></i>
                                                                 </a>
                                                                 <a href="#" title="Delete"><i class="las la-trash-alt text-secondary fs-18"></i></a>
+                                                                <a href="#" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-bs-target="#addPinjam" 
+                                                                    data-id="<?= $row->id ?>"
+                                                                    data-kode_buku="<?= $row->kode_buku ?>"
+                                                                    data-nama_buku="<?= $row->nama_buku ?>"
+                                                                    title="Pinjam">
+                                                                    <i class="las la-folder-plus text-secondary fs-18"></i>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>
@@ -246,6 +265,56 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal pinjam -->
+        <div class="modal fade" id="addPinjam" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="text_buku">Pinjam Buku</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<?= base_url('buku/addpinjam') ?>" method="post">
+                            <input type="hidden" name="buku_id_pinjam" id="buku_id_pinjam">
+                            <div class="mb-3">
+                                <label for="siswa" class="form-label">Siswa</label>
+                                <div class="col-sm-12">
+                                    <select class="form-select" name="siswa" id="siswa_pinjam" aria-label="Pilih Siswa">
+                                        <option selected disabled value="">Pilih Siswa</option>
+                                        <?php foreach ($siswa as $k): ?>
+                                            <option value="<?= $k->id; ?>"><?= $k->nis; ?> - <?= $k->nama; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="jml_pinjaman" class="form-label">Jumlah Pinjam</label>
+                                <input type="number" class="form-control" id="jml_pinjaman" name="jml_pinjaman" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>
+                                <div class="col-sm-12">
+                                    <input class="form-control" type="date" value="<?= date('Y-m-d'); ?>" name="tgl_pinjam" id="tgl_pinjam">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">                            
+                                    <div class="mb-3">
+                                        <label class="form-label" for="note">Keterangan</label>
+                                        <textarea class="form-control" rows="5" id="note" name="note"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">Tambah Pinjaman</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var myModal = document.getElementById('editBook');
@@ -291,6 +360,30 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('#addStokId').value = id;
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    var myModal = document.getElementById('addPinjam');
+    
+    // Event listener untuk menangani ketika modal sedang dibuka
+    myModal.addEventListener('show.bs.modal', function (event) {
+        // Ambil tombol yang memicu modal
+        var button = event.relatedTarget;
+        
+        // Ambil data dari tombol
+        var id = button.getAttribute('data-id');
+        var kode_buku = button.getAttribute('data-kode_buku');
+        var nama_buku = button.getAttribute('data-nama_buku');
+        
+        // Cari input yang ada di dalam modal dan setel nilainya
+        var modal = myModal;
+        modal.querySelector('#buku_id_pinjam').value = id;
+        modal.querySelector('#text_buku').textContent = "Pinjam Buku "+nama_buku+" ("+kode_buku+")";
+
+        
+        // Jika perlu, kamu juga bisa mengatur field lainnya seperti ID atau data tersembunyi
+        // Sebagai contoh, menyimpan ID yang dipilih untuk di-submit dengan form
+        modal.querySelector('#editPinjamId').value = id;
+    });
+});
 document.addEventListener('DOMContentLoaded', function() {
     // Cek apakah ada alert yang muncul
     var alert = document.getElementById('flashAlert');
@@ -301,4 +394,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000); // 2000 ms = 2 detik
     }
 });
+$(document).ready(function() {
+    $('#siswa_pinjam').select2({
+        theme: 'bootstrap-5',
+        placeholder: 'Pilih Siswa',
+        allowClear: true,
+        width: '100%',
+        dropdownParent: $('#addPinjam') // <--- GANTI ini dengan ID modal kamu
+    });
+});
+
 </script>

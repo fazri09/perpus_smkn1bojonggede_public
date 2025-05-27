@@ -22,17 +22,17 @@ class Buku_model extends CI_Model {
     }
 
     public function get_all_buku_with_stok()
-{
-    $this->db->select("
-        buku.*,
-        COALESCE(SUM(CASE WHEN pos.type = 'IN' THEN pos.qty ELSE 0 END), 0) -
-        COALESCE(SUM(CASE WHEN pos.type = 'OUT' THEN pos.qty ELSE 0 END), 0) AS stok
-    ");
-    $this->db->from('buku');
-    $this->db->join('pos', 'pos.buku_id = buku.id', 'left');
-    $this->db->group_by('buku.id');
-    
-    return $this->db->get()->result();
-}
+    {
+        $this->db->select("
+            buku.*,
+            COALESCE(SUM(CASE WHEN pos.type = 'IN' THEN pos.qty ELSE 0 END), 0) -
+            COALESCE(SUM(CASE WHEN pos.type = 'OUT' THEN pos.qty ELSE 0 END), 0) AS stok
+        ");
+        $this->db->from('buku');
+        $this->db->join('pos', 'pos.buku_id = buku.id', 'left');
+        $this->db->group_by('buku.id');
+        
+        return $this->db->get()->result();
+    }
 
 }

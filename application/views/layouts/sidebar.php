@@ -103,6 +103,18 @@
                                 <span>Data Buku</span>
                             </a>
                         </li><!--end nav-item-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('pinjaman'); ?>">
+                                <i class="fas fa-list menu-icon"></i>
+                                <span>Data Peminjam</span>
+                            </a>
+                        </li><!--end nav-item-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= base_url('history'); ?>">
+                                <i class="fas fa-history menu-icon"></i>
+                                <span>History Pinjaman</span>
+                            </a>
+                        </li><!--end nav-item-->
 
                         <li class="nav-item">
                             <a class="nav-link" href="#sidebarMaster" data-bs-toggle="collapse" role="button"

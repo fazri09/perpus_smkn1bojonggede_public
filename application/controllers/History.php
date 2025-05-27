@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Buku extends Fazri_Controller {
+class History extends Fazri_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('session');
@@ -13,10 +13,9 @@ class Buku extends Fazri_Controller {
     }
 
     public function index() {
-        $data['title'] = 'Buku';
-        $data['content'] = 'buku';
-        $data['buku'] = $this->Buku_model->get_all_buku_with_stok();
-        $data['siswa'] = $this->Siswa_model->get_all();
+        $data['title'] = 'History Pinjaman';
+        $data['content'] = 'history';
+        $data['history'] = $this->Pos_model->history_pinjaman();
         $this->load->view('layouts/template', $data);
     }
     
@@ -109,4 +108,25 @@ class Buku extends Fazri_Controller {
 
         redirect('buku');
     }
+
+    public function pinjaman_kembali()
+    {
+        $input = json_decode(file_get_contents("php://input"), true);
+        $id = $input['id'] ?? null;
+        $tanggal_kembali = $input['tanggal_kembali'] ?? null;
+
+        if ($id && $tanggal_kembali) {
+            $update = $this->Pos_model->updatePengembalian($id, $tanggal_kembali);
+
+            if ($update) {
+                echo json_encode(['status' => true, 'message' => 'Pengembalian berhasil']);
+            } else {
+                echo json_encode(['status' => false, 'message' => 'Gagal update data']);
+            }
+        } else {
+            echo json_encode(['status' => false, 'message' => 'Data tidak lengkap']);
+        }
+    }
+
+
 }
