@@ -112,8 +112,9 @@ class Pinjaman extends Fazri_Controller {
     public function pinjaman_kembali()
     {
         $input = json_decode(file_get_contents("php://input"), true);
-        $id = $input['id'] ?? null;
-        $tanggal_kembali = $input['tanggal_kembali'] ?? null;
+        $id = isset($input['id']) ? $input['id'] : null;
+        $tanggal_kembali = isset($input['tanggal_kembali']) ? $input['tanggal_kembali'] : null;
+
 
         if ($id && $tanggal_kembali) {
             $update = $this->Pos_model->updatePengembalian($id, $tanggal_kembali);
