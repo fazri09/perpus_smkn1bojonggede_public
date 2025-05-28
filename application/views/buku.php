@@ -196,7 +196,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="kode_buku" class="form-label">Kode&nbsp;Buku</label>
-                        <input class="form-control" type="number" id="kode_buku" name="kode_buku" required>
+                        <input class="form-control" type="text" id="kode_buku" name="kode_buku" required>
                     </div> 
                     <div class="mb-3">
                         <label for="nama_buku" class="form-label">Nama&nbsp;Buku</label>
@@ -225,7 +225,7 @@
                             <input type="hidden" name="id_buku" id="id_buku">
                             <div class="mb-3">
                                 <label for="kode_buku_edit" class="form-label">Kode Buku</label>
-                                <input type="number" class="form-control" id="kode_buku_edit" name="kode_buku" required>
+                                <input type="text" class="form-control" id="kode_buku_edit" name="kode_buku" required>
                             </div>
                             <div class="mb-3">
                                 <label for="nama_buku_edit" class="form-label">Nama Buku</label>
