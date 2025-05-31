@@ -74,7 +74,7 @@
                                         <i class="fas fa-users fs-4"></i>
                                     </div>
                                     <div class="flex-grow-1 ms-2 text-truncate">
-                                        <p class="text-dark mb-0 fw-semibold fs-14">Jumlah Siswa</p>
+                                        <p class="text-dark mb-0 fw-semibold fs-14">Jumlah Anggota</p>
                                     </div><!--end media-body-->
                                 </div><!--end media-->
                                 <div class="row d-flex justify-content-center">
@@ -179,7 +179,61 @@
                             </div><!--end card-body--> 
                         </div><!--end card--> 
                     </div> <!--end col--> 
-                    <div class="col-md-6 col-lg-8">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">                      
+                                        <h4 class="card-title">Anggota Paling Banyak Meminjam Buku</h4>                      
+                                    </div><!--end col-->
+                                    <!-- <div class="col-auto"> 
+                                        <div class="dropdown">
+                                            <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="icofont-calendar fs-5 me-1"></i> This Year<i class="las la-angle-down ms-1"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Today</a>
+                                                <a class="dropdown-item" href="#">Last Week</a>
+                                                <a class="dropdown-item" href="#">Last Month</a>
+                                                <a class="dropdown-item" href="#">This Year</a>
+                                            </div>
+                                        </div>               
+                                    </div> -->
+                                </div>  <!--end row-->                                  
+                            </div><!--end card-header-->
+                            <div class="card-body pt-0">
+                                <div class="table-responsive">
+                                   <table class="table mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="border-top-0">NIS</th>
+                                                <th class="border-top-0">Nama</th>
+                                                <th class="border-top-0">Kelas</th>
+                                                <th class="border-top-0">Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($top_siswa)) : ?>
+                                                <?php foreach ($top_siswa as $siswa) : ?>
+                                                    <tr>
+                                                        <td><?= htmlspecialchars($siswa->nis) ?></td>
+                                                        <td><?= htmlspecialchars($siswa->nama) ?></td>
+                                                        <td><?= htmlspecialchars($siswa->nama_kelas ?? 'Unknown') ?></td>
+                                                        <td><?= htmlspecialchars($siswa->jumlah_buku_dipinjam) ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else : ?>
+                                                <tr>
+                                                    <td colspan="4" class="text-center">Tidak ada data</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div><!--end /div-->
+                            </div><!--end card-body--> 
+                        </div><!--end card--> 
+                    </div> <!--end col-->   
+                    <div class="col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row align-items-center">
@@ -208,7 +262,7 @@
                                             <tr>
                                                 <th class="border-top-0">Kode Buku</th>
                                                 <th class="border-top-0">Nama Buku</th>
-                                                <th class="border-top-0">Jumlah Dipinjam</th>
+                                                <th class="border-top-0">Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>

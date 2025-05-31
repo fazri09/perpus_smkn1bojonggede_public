@@ -109,6 +109,32 @@ class Pos_model extends CI_Model {
         return array_values($data); // Ubah jadi [0, 3, 12, ...]
     }
 
+    public function get_jumlah_pinjaman_per_jurusan()
+    {
+        $this->db->select('
+            j.nama_jurusan,
+            COALESCE(SUM(p.qty), 0) as jumlah_pinjaman
+        ');
+        $this->db->from('mst_jurusan j');
+        $this->db->join('siswa s', 's.id_jurusan = j.id', 'left');
+        $this->db->join('pos p', 'p.siswa = s.id AND p.siswa IS NOT NULL', 'left');
+        $this->db->group_by('j.id');
+        $this->db->order_by('jumlah_pinjaman', 'DESC');
+        return $this->db->get()->result();
+    }
+    
+    public function get_top_5_siswa_peminjam() {
+        $this->db->select('s.nis, s.nama, k.nama_kelas, SUM(p.qty) AS jumlah_buku_dipinjam');
+        $this->db->from('pos p');
+        $this->db->join('siswa s', 'p.siswa = s.id');
+        $this->db->join('mst_kelas k', 's.id_kelas = k.id', 'left');
+        $this->db->where('p.siswa IS NOT NULL');
+        $this->db->group_by('s.id');
+        $this->db->order_by('jumlah_buku_dipinjam', 'DESC');
+        $this->db->limit(5);
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     
 }
