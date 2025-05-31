@@ -113,7 +113,8 @@ class Pos_model extends CI_Model {
     {
         $this->db->select('
             j.nama_jurusan,
-            COALESCE(SUM(p.qty), 0) as jumlah_pinjaman
+            COALESCE(SUM(p.qty), 0) as jumlah_pinjaman, 
+            j.foto_jurusan
         ');
         $this->db->from('mst_jurusan j');
         $this->db->join('siswa s', 's.id_jurusan = j.id', 'left');

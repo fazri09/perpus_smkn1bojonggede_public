@@ -144,22 +144,16 @@
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                     <tbody>
-                                        <?php
-                                            $flag_images = [
-                                                'assets/images/flags/us_flag.jpg',
-                                                'assets/images/flags/spain_flag.jpg',
-                                                'assets/images/flags/french_flag.jpg',
-                                                'assets/images/flags/germany_flag.jpg',
-                                                'assets/images/flags/baha_flag.jpg',
-                                                'assets/images/flags/russia_flag.jpg',
-                                            ];
-                                            $i = 0;
-                                        ?>
                                         <?php foreach ($top_jurusan as $row): ?>
                                         <tr>
                                             <td class="px-0">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?= base_url($flag_images[$i % count($flag_images)]) ?>" class="me-2 align-self-center thumb-md rounded" alt="flag">
+                                                    <?php
+                                                        $gambar = !empty($row->foto_jurusan) 
+                                                                ? 'uploads/jurusan/' . $row->foto_jurusan 
+                                                                : 'uploads/jurusan/no_picture.png';
+                                                    ?>
+                                                    <img src="<?= base_url($gambar) ?>" class="me-2 align-self-center thumb-md rounded" alt="jurusan">
                                                     <div class="flex-grow-1 text-truncate"> 
                                                         <h6 class="m-0 text-truncate"><?= htmlspecialchars($row->nama_jurusan) ?></h6>
                                                     </div>
@@ -171,7 +165,7 @@
                                                 </span>
                                             </td>
                                         </tr>
-                                        <?php $i++; endforeach; ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                             
