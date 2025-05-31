@@ -74,7 +74,8 @@
                                                                     title="Edit"
                                                                     data-id="<?= $row->id ?>"
                                                                     data-nama_jurusan="<?= $row->nama_jurusan ?>"
-                                                                    data-singkatan_jurusan="<?= $row->singkatan_jurusan ?>">
+                                                                    data-singkatan_jurusan="<?= $row->singkatan_jurusan ?>"
+                                                                    data-gambar="<?= $row->foto_jurusan ?>">
                                                                     <i class="las la-pen text-secondary fs-18"></i>
                                                                 </a>
                                                             </td>
@@ -204,7 +205,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="<?= base_url('jurusan/edit') ?>" method="post">
+                        <form action="<?= base_url('jurusan/edit') ?>" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id">
                             <div class="mb-3">
                                 <label for="nama_jurusan_edit" class="form-label">Nama Jurusan</label>
@@ -213,6 +214,14 @@
                             <div class="mb-3">
                                 <label for="singkatan_jurusan_edit" class="form-label">Singkatan Jurusan</label>
                                 <input type="text" class="form-control" id="singkatan_jurusan_edit" name="singkatan_jurusan" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gambar_jurusan_edit" class="form-label">Gambar Jurusan</label>
+                                <input type="file" class="form-control" id="gambar_jurusan_edit" name="gambar_jurusan" accept="image/*">
+                            </div>
+
+                            <div class="mb-3">
+                                <img id="preview_gambar_edit" src="<?= base_url('uploads/jurusan/no_picture.png') ?>" alt="Preview Gambar" style="max-width: 150px; max-height: 150px;"/>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -237,16 +246,29 @@ document.addEventListener('DOMContentLoaded', function () {
         var id = button.getAttribute('data-id');
         var nama_jurusan = button.getAttribute('data-nama_jurusan');
         var singkatan_jurusan = button.getAttribute('data-singkatan_jurusan');
+        var gambar = button.getAttribute('data-gambar'); 
         
         // Cari input yang ada di dalam modal dan setel nilainya
         var modal = myModal;
         modal.querySelector('#id').value = id;
         modal.querySelector('#nama_jurusan_edit').value = nama_jurusan;
         modal.querySelector('#singkatan_jurusan_edit').value = singkatan_jurusan;
+
+        var previewImg = modal.querySelector('#preview_gambar_edit');
+        if(gambar){
+            previewImg.src = '<?= base_url() ?>uploads/jurusan/' + gambar;
+        } else {
+            previewImg.src = '<?= base_url() ?>uploads/jurusan/no_picture.png';
+        }
         
         // Jika perlu, kamu juga bisa mengatur field lainnya seperti ID atau data tersembunyi
         // Sebagai contoh, menyimpan ID yang dipilih untuk di-submit dengan form
         modal.querySelector('#editJurusanId').value = id;
+    });
+    // Preview saat pilih file baru
+    document.getElementById('gambar_jurusan_edit').addEventListener('change', function(event) {
+    var output = document.getElementById('preview_gambar_edit');
+    output.src = URL.createObjectURL(event.target.files[0]);
     });
 });
 document.addEventListener('DOMContentLoaded', function() {

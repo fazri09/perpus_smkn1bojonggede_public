@@ -67,11 +67,41 @@ class Jurusan extends Fazri_Controller {
         $nama_jurusan = $this->input->post('nama_jurusan');
         $singkatan_jurusan = $this->input->post('singkatan_jurusan');
 
+        // Load library upload CI
+        $config['upload_path'] = './uploads/jurusan/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['max_size'] = 2048; // 2MB
+        $config['file_name'] = 'jurusan_'.$id.'_'.time();
+        $this->load->library('upload', $config);
+
+        $gambar_file = null;
+        if (!empty($_FILES['gambar_jurusan']['name'])) {
+            if ($this->upload->do_upload('gambar_jurusan')) {
+                $uploadData = $this->upload->data();
+                $gambar_file = $uploadData['file_name'];
+
+                // Bisa juga hapus file lama jika ada, untuk pengelolaan storage
+            } else {
+                // Upload gagal, bisa tangani error atau abaikan
+                $error = $this->upload->display_errors();
+
+                $this->session->set_flashdata('notif', 'Gagal upload gambar : '.$error);
+                $this->session->set_flashdata('notif_type', 'danger');  // Set flashdata gagal
+                redirect('jurusan');
+                die;
+                // echo $error; or set flashdata error
+            }
+        }
+
+
         // Proses update jurusan
         $data = [
             'nama_jurusan' => $nama_jurusan,
             'singkatan_jurusan' => $singkatan_jurusan
         ];
+        if ($gambar_file) {
+                $data['foto_jurusan'] = $gambar_file;
+        }
 
         // Panggil model untuk update data jurusan berdasarkan id
         if ($this->Jurusan_model->update($id, $data)) {
