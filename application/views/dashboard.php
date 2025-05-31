@@ -125,7 +125,7 @@
                                     <div class="col">                      
                                         <h4 class="card-title">Jurusan Paling Banyak Meminjam Buku</h4>                      
                                     </div><!--end col-->
-                                    <div class="col-auto"> 
+                                    <!-- <div class="col-auto"> 
                                         <div class="dropdown">
                                             <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="icofont-calendar fs-5 me-1"></i> This Month<i class="las la-angle-down ms-1"></i>
@@ -137,81 +137,44 @@
                                                 <a class="dropdown-item" href="#">This Year</a>
                                             </div>
                                         </div>               
-                                    </div><!--end col-->
+                                    </div> -->
                                 </div>  <!--end row-->                                  
                             </div><!--end card-header-->
                             <div class="card-body pt-0">
                                 <div class="table-responsive">
                                     <table class="table mb-0">
-                                        <tbody>
-                                            <tr class="">                                                        
-                                                <td class="px-0">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/flags/us_flag.jpg" class="me-2 align-self-center thumb-md rounded" alt="...">
-                                                        <div class="flex-grow-1 text-truncate"> 
-                                                            <h6 class="m-0 text-truncate">Rekayasa Perangkat Lunak</h6>
-                                                        </div><!--end media body-->
-                                                    </div><!--end media-->
-                                                </td>
-                                                <td  class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">568 Buku</span></td>  
-                                            </tr><!--end tr-->  
-                                            <tr class="">                                                        
-                                                <td class="px-0">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/flags/spain_flag.jpg" class="me-2 align-self-center thumb-md rounded" alt="...">
-                                                        <div class="flex-grow-1 text-truncate"> 
-                                                            <h6 class="m-0 text-truncate">Teknik Gambar Bangunan</h6>
-                                                        </div><!--end media body-->
-                                                    </div><!--end media-->
-                                                </td>
-                                                <td  class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">513 Buku</span></td>  
-                                            </tr><!--end tr--> 
-                                            <tr class="">                                                        
-                                                <td class="px-0">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/flags/french_flag.jpg" class="me-2 align-self-center thumb-md rounded" alt="...">
-                                                        <div class="flex-grow-1 text-truncate"> 
-                                                            <h6 class="m-0 text-truncate">Multimedia</h6>
-                                                        </div><!--end media body-->
-                                                    </div><!--end media-->
-                                                </td>
-                                                <td  class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">403 Buku</span></td>  
-                                            </tr><!--end tr--> 
-                                            <tr class="">                                                        
-                                                <td class="px-0">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/flags/germany_flag.jpg" class="me-2 align-self-center thumb-md rounded" alt="...">
-                                                        <div class="flex-grow-1 text-truncate"> 
-                                                            <h6 class="m-0 text-truncate">Teknik Kontruksi Kayu</h6>
-                                                        </div><!--end media body-->
-                                                    </div><!--end media-->
-                                                </td>
-                                                <td  class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">301 Buku</span></td>  
-                                            </tr><!--end tr--> 
-                                            <tr class="">                                                        
-                                                <td class="px-0">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/flags/baha_flag.jpg" class="me-2 align-self-center thumb-md rounded" alt="...">
-                                                        <div class="flex-grow-1 text-truncate"> 
-                                                            <h6 class="m-0 text-truncate">Teknik Komputer Jaringan</h6>
-                                                        </div><!--end media body-->
-                                                    </div><!--end media-->
-                                                </td>
-                                                <td  class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">287 Buku</span></td>  
-                                            </tr><!--end tr-->
-                                            <tr class="">                                                        
-                                                <td class="px-0">
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/flags/russia_flag.jpg" class="me-2 align-self-center thumb-md rounded" alt="...">
-                                                        <div class="flex-grow-1 text-truncate"> 
-                                                            <h6 class="m-0 text-truncate">Teknik Otomasi Industri</h6>
-                                                        </div><!--end media body-->
-                                                    </div><!--end media-->
-                                                </td>
-                                                <td  class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">107 Buku</span></td>  
-                                            </tr><!--end tr-->       
-                                        </tbody>
-                                    </table> <!--end table-->                                               
+                                    <tbody>
+                                        <?php
+                                            $flag_images = [
+                                                'assets/images/flags/us_flag.jpg',
+                                                'assets/images/flags/spain_flag.jpg',
+                                                'assets/images/flags/french_flag.jpg',
+                                                'assets/images/flags/germany_flag.jpg',
+                                                'assets/images/flags/baha_flag.jpg',
+                                                'assets/images/flags/russia_flag.jpg',
+                                            ];
+                                            $i = 0;
+                                        ?>
+                                        <?php foreach ($top_jurusan as $row): ?>
+                                        <tr>
+                                            <td class="px-0">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="<?= base_url($flag_images[$i % count($flag_images)]) ?>" class="me-2 align-self-center thumb-md rounded" alt="flag">
+                                                    <div class="flex-grow-1 text-truncate"> 
+                                                        <h6 class="m-0 text-truncate"><?= htmlspecialchars($row->nama_jurusan) ?></h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="px-0 text-end">
+                                                <span class="text-body ps-2 align-self-center text-end fw-medium">
+                                                    <?= htmlspecialchars($row->jumlah_pinjaman) ?> Buku
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <?php $i++; endforeach; ?>
+                                    </tbody>
+                                </table>
+                                            
                                 </div><!--end /div-->                           
                             </div><!--end card-body--> 
                         </div><!--end card--> 
@@ -223,7 +186,7 @@
                                     <div class="col">                      
                                         <h4 class="card-title">Buku Paling Banyak Di Pinjam</h4>                      
                                     </div><!--end col-->
-                                    <div class="col-auto"> 
+                                    <!-- <div class="col-auto"> 
                                         <div class="dropdown">
                                             <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="icofont-calendar fs-5 me-1"></i> This Year<i class="las la-angle-down ms-1"></i>
@@ -235,7 +198,7 @@
                                                 <a class="dropdown-item" href="#">This Year</a>
                                             </div>
                                         </div>               
-                                    </div><!--end col-->
+                                    </div> -->
                                 </div>  <!--end row-->                                  
                             </div><!--end card-header-->
                             <div class="card-body pt-0">
@@ -245,45 +208,23 @@
                                             <tr>
                                                 <th class="border-top-0">Kode Buku</th>
                                                 <th class="border-top-0">Nama Buku</th>
-                                                <th class="border-top-0">Jumlah Di Pinjam</th>
-                                            </tr><!--end tr-->
+                                                <th class="border-top-0">Jumlah Dipinjam</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr> 
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr> 
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr> 
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr> 
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr> 
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr> 
-                                            <tr>                                                        
-                                                <td>21311</td>                                   
-                                                <td>Fazri Terbit Bulan</td>
-                                                <td>1</td>
-                                            </tr>                          
+                                            <?php if (!empty($top_buku)) : ?>
+                                                <?php foreach ($top_buku as $buku) : ?>
+                                                    <tr>
+                                                        <td><?= htmlspecialchars($buku->kode_buku) ?></td>
+                                                        <td><?= htmlspecialchars($buku->nama_buku) ?></td>
+                                                        <td><?= htmlspecialchars($buku->jumlah_pinjaman) ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else : ?>
+                                                <tr>
+                                                    <td colspan="3" class="text-center">Tidak ada data</td>
+                                                </tr>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table> <!--end table-->                                               
                                 </div><!--end /div-->

@@ -18,6 +18,8 @@ class Dashboard extends Fazri_Controller {
         $data['jml_buku'] = $this->Buku_model->get_jumlah_buku();
         $data['jml_siswa'] = $this->Siswa_model->get_jumlah_siswa();        
         $data['jml_stok_buku'] = $this->Buku_model->get_total_stok_buku();
+        $data['top_buku'] = $this->Buku_model->get_top_6_buku_terbanyak_dipinjam();
+        $data['top_jurusan'] = $this->Buku_model->get_jumlah_pinjaman_per_jurusan();
         $this->load->view('layouts/template', $data);
     }
 

@@ -55,4 +55,30 @@ class Buku_model extends CI_Model {
         return $query->row()->total_stok;
     }
 
+    public function get_top_6_buku_terbanyak_dipinjam()
+    {
+        $this->db->select('b.kode_buku, b.nama_buku, SUM(p.qty) AS jumlah_pinjaman');
+        $this->db->from('pos p');
+        $this->db->join('buku b', 'b.id = p.buku_id');
+        $this->db->where('p.siswa IS NOT NULL');
+        $this->db->group_by('p.buku_id');
+        $this->db->order_by('jumlah_pinjaman', 'DESC');
+        $this->db->limit(6);
+        return $this->db->get()->result();
+    }
+
+    public function get_jumlah_pinjaman_per_jurusan()
+    {
+        $this->db->select('
+            j.nama_jurusan,
+            COALESCE(SUM(p.qty), 0) as jumlah_pinjaman
+        ');
+        $this->db->from('mst_jurusan j');
+        $this->db->join('siswa s', 's.id_jurusan = j.id', 'left');
+        $this->db->join('pos p', 'p.siswa = s.id AND p.siswa IS NOT NULL', 'left');
+        $this->db->group_by('j.id');
+        $this->db->order_by('jumlah_pinjaman', 'DESC');
+        return $this->db->get()->result();
+    }
+
 }
