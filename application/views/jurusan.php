@@ -49,6 +49,7 @@
                                             <thead class="table-light">
                                               <tr>
                                                 <th>No</th>
+                                                <th>Foto</th>
                                                 <th>Nama Jurusan</th>
                                                 <th>Singkatan Jurusan</th>
                                                 <th>Aksi</th>
@@ -59,6 +60,11 @@
                                                     <?php $no = 1; foreach ($jurusan as $row): ?> 
                                                         <tr>
                                                             <td><?= $no++ ?></td>
+                                                            <td>
+                                                            <img src="<?= base_url('uploads/jurusan/' . (!empty($row->foto_jurusan) ? $row->foto_jurusan : 'no_picture.png')) ?>" 
+                                                                alt="Foto Jurusan" 
+                                                                style="width:50px; height:auto; border-radius:4px;">
+                                                            </td>
                                                             <td><?= $row->nama_jurusan ?></td>
                                                             <td><?= $row->singkatan_jurusan ?></td>
                                                             <td>                                                       
@@ -165,7 +171,7 @@
                     <h6 class="modal-title">Tambah Jurusan</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="<?= base_url('jurusan/add') ?>" method="post">
+                <form action="<?= base_url('jurusan/add') ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama_jurusan" class="form-label">Nama&nbsp;Jurusan</label>
@@ -175,6 +181,10 @@
                         <label for="singkatan_jurusan" class="form-label">Singkatan&nbsp;Jurusan</label>
                         <input class="form-control" type="text" id="singkatan_jurusan" name="singkatan_jurusan" required>
                     </div> 
+                    <div class="mb-3">
+                        <label for="foto_jurusan" class="form-label">Upload Foto Jurusan</label>
+                        <input class="form-control" type="file" id="foto_jurusan" name="foto_jurusan" accept="image/*" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm">Submit</button>

@@ -20,23 +20,45 @@ class Jurusan extends Fazri_Controller {
     }
 
     public function add() {
-         $data = [
-            'nama_jurusan' => $this->input->post('nama_jurusan'),
-            'singkatan_jurusan' => $this->input->post('singkatan_jurusan'),
-            'created_by' => $this->session->userdata('user_id')
-        ];
 
-        if ($this->Jurusan_model->insert($data)) {
-            // Jika update sukses
-            $this->session->set_flashdata('notif', 'Data Jurusan berhasil diinput.');
-            $this->session->set_flashdata('notif_type', 'success');  // Set flashdata sukses
-        } else {
+        $this->load->library('upload');
+
+        $config['upload_path'] = './uploads/jurusan/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['max_size'] = 2048; // max 2MB
+        $config['file_name'] = uniqid('jurusan_');
+
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('foto_jurusan')) {
+            // Jika upload gagal
+            $error = $this->upload->display_errors();
             // Jika update gagal
-            $this->session->set_flashdata('notif', 'Gagal menginput data jurusan.');
+            $this->session->set_flashdata('notif', 'Gagal upload gambar : '.$error);
             $this->session->set_flashdata('notif_type', 'danger');  // Set flashdata gagal
-        }
+            redirect('jurusan');
+        } else {
+            $upload_data = $this->upload->data();
 
-        redirect('jurusan'); // arahkan kembali ke halaman utama jurusan
+            $data = [
+                'nama_jurusan' => $this->input->post('nama_jurusan'),
+                'singkatan_jurusan' => $this->input->post('singkatan_jurusan'),
+                'foto_jurusan' => $upload_data['file_name'],
+                'created_by' => $this->session->userdata('user_id')
+            ];
+
+            if ($this->Jurusan_model->insert($data)) {
+                // Jika update sukses
+                $this->session->set_flashdata('notif', 'Data Jurusan berhasil diinput.');
+                $this->session->set_flashdata('notif_type', 'success');  // Set flashdata sukses
+            } else {
+                // Jika update gagal
+                $this->session->set_flashdata('notif', 'Gagal menginput data jurusan.');
+                $this->session->set_flashdata('notif_type', 'danger');  // Set flashdata gagal
+            }
+
+            redirect('jurusan'); // arahkan kembali ke halaman utama jurusan
+        }
     }
 
     public function edit()

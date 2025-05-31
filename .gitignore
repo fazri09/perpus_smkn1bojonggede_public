@@ -26,6 +26,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 # Ignore database.php
 /application/config/database.php
 
+/uploads/*
+
 # Ignore config.php
 /application/config/config.php
 
