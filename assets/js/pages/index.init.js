@@ -3,15 +3,15 @@ var options = {
       height: 290,
       type: "area",
       width: "100%",
-      stacked: true,
+      stacked: false,
       toolbar: { show: false, autoSelected: "zoom" },
     },
     colors: ["#2a77f4", "rgba(42, 118, 244, .4)"],
     dataLabels: { enabled: false },
     stroke: {
       curve: "straight",
-      width: [0, 0],
-      dashArray: [0, 4],
+      width: 2,
+      dashArray: 0,
       lineCap: "round",
     },
     grid: { padding: { left: 0, right: 0 }, strokeDashArray: 3 },
@@ -27,6 +27,9 @@ var options = {
       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       axisBorder: { show: true },
       axisTicks: { show: true },
+    },
+    yaxis: {
+       
     },
     fill: {
       type: "gradient",
@@ -45,15 +48,30 @@ var options = {
   chart.render();
 
   // AJAX ambil data dari controller CI
-  $.ajax({
+$.ajax({
   url: base_url + "dashboard/grafik_peminjaman_bulanan",
   method: "GET",
   dataType: "json",
   success: function(data) {
-    console.log("Data dari server:", data);
-    chart.updateSeries([{ name: "Peminjam", data: data }]);
+    const max = Math.max(...data); // ambil nilai tertinggi
+    const roundedMax = Math.ceil(max); // bulatkan ke atas
+    const tickAmount = roundedMax; // pakai jumlah ticks sama dgn max (0..max)
+
+    chart.updateOptions({
+      yaxis: {
+        min: 0,
+        max: roundedMax,
+        tickAmount: tickAmount,
+        decimalsInFloat: 0,
+      },
+    });
+
+    chart.updateSeries([
+      { name: "Peminjam", data: data }
+    ]);
   },
   error: function(xhr, status, error) {
     console.error("Gagal load data grafik:", error);
   }
 });
+
