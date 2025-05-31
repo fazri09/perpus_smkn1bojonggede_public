@@ -88,7 +88,6 @@
                                                                     data-nama_buku="<?= $row->nama_buku ?>">
                                                                     <i class="las la-pen text-secondary fs-18"></i>
                                                                 </a>
-                                                                <a href="#" title="Delete"><i class="las la-trash-alt text-secondary fs-18"></i></a>
                                                                 <a href="#" 
                                                                     data-bs-toggle="modal" 
                                                                     data-bs-target="#addPinjam" 
