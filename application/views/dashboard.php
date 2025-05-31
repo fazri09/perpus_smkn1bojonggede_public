@@ -218,7 +218,7 @@
                                                     <tr>
                                                         <td><?= htmlspecialchars($siswa->nis) ?></td>
                                                         <td><?= htmlspecialchars($siswa->nama) ?></td>
-                                                        <td><?= htmlspecialchars($siswa->nama_kelas ?? 'Unknown') ?></td>
+                                                        <td><?= htmlspecialchars($siswa->nama_kelas) ?></td>
                                                         <td><?= htmlspecialchars($siswa->jumlah_buku_dipinjam) ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
