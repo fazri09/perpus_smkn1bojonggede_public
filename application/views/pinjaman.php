@@ -9,7 +9,7 @@
                                 <h4 class="page-title">Data Peminjam</h4>
                                 <div class="">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item"><a href="#">Mifty</a>
+                                        <li class="breadcrumb-item"><a href="#">Nesabo</a>
                                         </li><!--end nav-item-->
                                         <li class="breadcrumb-item active">Data Peminjam</li>
                                     </ol>
