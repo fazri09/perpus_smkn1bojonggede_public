@@ -41,7 +41,7 @@
                     <li class="dropdown topbar-item">
                         <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="false" aria-expanded="false" data-bs-offset="0,19">
-                            <img src="assets/images/users/avatar-1.jpg" alt="" class="thumb-md rounded-circle">
+                            <img src="assets/images/logo-sm.png" alt="" class="thumb-md rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end py-0">
                             <div class="d-flex align-items-center dropdown-item py-2 bg-secondary-subtle">
